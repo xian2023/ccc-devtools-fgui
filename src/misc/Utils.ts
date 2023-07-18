@@ -72,6 +72,16 @@ export default class Utils {
         });
     }
 
+    static getGComponents(ccNode: any) {
+        if (!ccNode.$gobj?.components) {
+            return [];
+        }
+
+        return ccNode.$gobj.components.map((component: any) => {
+            return { name: component.__classname__, target: component }
+        });
+    }
+
     static getSelfBoundingBoxToWold(transform: any) {
         let _worldMatrix = cc.mat4();
         if (transform.node.parent) {

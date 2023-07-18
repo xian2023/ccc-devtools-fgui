@@ -93,10 +93,19 @@ function handleNodeCollapse(data: any) {
 function setChildren(container: TreeNode[], children: any[], path: string[]) {
   children.forEach(ccNode => {
     const childPath = path.concat(ccNode.uuid);
+    let name = ccNode?.name;
+    const gobj = ccNode?.$gobj;
+    if (gobj) {
+      if (!gobj.id.startsWith(gobj.name)) {
+        name = gobj.name;
+      } else if (gobj.name == '') {
+        name = gobj.constructor.name;
+      }
+    }
     const node = {
       uuid: ccNode.uuid,
-      name: ccNode.name,
-      active: ccNode.activeInHierarchy,
+      name,
+      active: ccNode?.activeInHierarchy,
       children: [],
       path: childPath,
     };
